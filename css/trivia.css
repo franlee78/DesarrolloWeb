@@ -1,0 +1,358 @@
+/* ====================== */
+/* VARIABLES Y ESTILOS BASE */
+/* ====================== */
+:root {
+    --violeta-primario: #7E57C2;
+    --violeta-claro: #D1C4E9;
+    --violeta-suave: #EDE7F6;
+    --amarillo-primario: #FFD54F;
+    --amarillo-claro: #FFF8E1;
+    --gris-fondo: #FAFAFA;
+    --gris-texto: #424242;
+    --gris-bordes: #E0E0E0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--gris-fondo);
+    margin: 0;
+    padding: 0;
+    color: var(--gris-texto);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ====================== */
+/* COMPONENTE NAVBAR */
+/* ====================== */
+.navbar {
+    background-color: var(--violeta-primario);
+    padding: 1rem 0;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-list li {
+    margin: 0;
+}
+
+.nav-list a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-list a:hover {
+    background-color: var(--violeta-claro);
+    transform: translateY(-2px);
+}
+
+.nav-list a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--amarillo-primario);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-list a:hover::after {
+    width: 80%;
+}
+
+/* ====================== */
+/* COMPONENTE IMÁGENES */
+/* ====================== */
+.grupo-imagen {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 15px 0;
+    text-align: center;
+}
+
+.img-grupo {
+    width: 80%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    border: 2px solid var(--amarillo-primario);
+    transition: all 0.3s ease;
+}
+
+.resultado-imagen {
+    width: 100%;
+    max-width: 500px;
+    margin: 20px auto 0;
+    text-align: center;
+}
+
+.resultado-imagen img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+    border: 3px solid var(--amarillo-primario);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Imágenes de integrantes */
+img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 20px auto;
+    border: 5px solid var(--amarillo-primario);
+    display: block;
+}
+
+/* ====================== */
+/* COMPONENTE CONTENEDORES */
+/* ====================== */
+.game-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.screen {
+    width: 100%;
+    max-width: 600px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    padding: 30px;
+    text-align: center;
+    animation: aparecer 0.5s ease;
+    margin-top: 1rem;
+}
+
+.resultado-container {
+    max-width: 500px; /* Reducido de 600px */
+    margin: 20px auto;
+    padding: 25px; /* Reducido de 30px */
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Sombra más sutil */
+}
+
+.ganador {
+    background-color: var(--amarillo-claro);
+    border: 3px solid var(--amarillo-primario);
+}
+
+.perdedor {
+    background-color: var(--violeta-suave);
+    border: 3px solid var(--violeta-claro);
+}
+
+.resultado-content {
+    padding: 20px;
+}
+
+.contenido-trivia, 
+.pregunta-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1rem;
+    text-align: center;
+}
+
+/* ====================== */
+/* COMPONENTE BOTONES */
+/* ====================== */
+.btn-comenzar,
+.btn-opcion,
+.btn-reiniciar {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.btn-comenzar {
+    background-color: var(--violeta-primario);
+    color: white;
+    border-color: var(--violeta-primario);
+}
+
+.btn-opcion {
+    display: block;
+    background-color: var(--violeta-claro);
+    color: var(--gris-texto);
+    border-color: var(--violeta-claro);
+    margin: 0.5rem auto;
+    width: 100%;
+    max-width: 300px;
+}
+
+.btn-reiniciar {
+    background-color: var(--violeta-primario);
+    color: white;
+    border-color: var(--violeta-primario);
+}
+
+.btn-comenzar:hover,
+.btn-opcion:hover,
+.btn-reiniciar:hover {
+    background-color: var(--amarillo-primario);
+    color: var(--gris-texto);
+    border-color: var(--amarillo-primario);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* ====================== */
+/* COMPONENTE OPCIONES */
+/* ====================== */
+.opciones {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.opciones a {
+    display: block;
+    padding: 12px 20px;
+    background-color: var(--violeta-claro);
+    color: var(--gris-texto);
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid var(--violeta-claro);
+    text-align: center;
+}
+
+.opciones a:hover {
+    background-color: var(--amarillo-primario);
+    color: var(--gris-texto);
+    border-color: var(--amarillo-primario);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* ====================== */
+/* TIPOGRAFÍA Y TEXTOS */
+/* ====================== */
+h1, h2 {
+    color: var(--violeta-primario);
+    margin-bottom: 20px;
+}
+
+.resultado-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.resultado-container h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.mensaje-ganador p,
+.mensaje-perdedor p {
+    font-size: 1.1rem;
+    margin: 10px 0;
+    color: var(--gris-texto);
+}
+
+/* ====================== */
+/* ANIMACIONES */
+/* ====================== */
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.confeti-animation {
+    width: 100%;
+    height: 100px;
+    background-image: url('../img/confeti.png');
+    background-size: contain;
+    background-repeat: repeat-x;
+    margin: 20px 0;
+    animation: confeti-move 5s linear infinite;
+}
+
+@keyframes confeti-move {
+    0% { background-position: 0 0; }
+    100% { background-position: 1000px 0; }
+}
+
+/* ====================== */
+/* MEDIA QUERIES (RESPONSIVE) */
+/* ====================== */
+@media (max-width: 768px) {
+    /* Navbar */
+    .nav-list {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    /* Imágenes */
+    .imagen-grupo img,
+    .resultado-imagen img {
+        max-width: 280px;
+    }
+    
+    /* Resultados */
+    .resultado-container {
+        padding: 20px 15px;
+        margin: 20px 15px;
+    }
+    
+    .resultado-container h1 {
+        font-size: 2rem;
+    }
+    
+    .resultado-container h2 {
+        font-size: 1.5rem;
+    }
+    
+    /* Botones */
+    .btn-reiniciar,
+    .btn-comenzar,
+    .btn-opcion {
+        padding: 10px 25px;
+    }
+    
+    /* Contenedores */
+    .game-container {
+        padding: 1rem;
+    }
+}
