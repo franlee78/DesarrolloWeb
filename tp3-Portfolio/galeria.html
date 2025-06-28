@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería - Francisco Lee</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        :root {
+            --violeta-primario: #7e57c2;
+            --violeta-claro: #d1c4e9;
+            --amarillo-primario: #ffd54f;
+            --gris-fondo: #fafafa;
+            --blanco: #ffffff;
+            --negro: #1a1a1a;
+            --sombra: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--gris-fondo);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .back-btn {
+            background: var(--violeta-primario);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            text-decoration: none;
+            margin-bottom: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #6a4fb8;
+            transform: translateY(-2px);
+        }
+
+        .header h1 {
+            color: var(--violeta-primario);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--blanco);
+            box-shadow: var(--sombra);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(126, 87, 194, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+
+        .overlay i {
+            color: white;
+            font-size: 2rem;
+        }
+
+        .gallery-info {
+            padding: 1rem;
+        }
+
+        .gallery-info h3 {
+            color: var(--violeta-primario);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .gallery-info p {
+            color: var(--negro);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            background: var(--blanco);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox img {
+            width: 100%;
+            height: auto;
+            max-height: 70vh;
+            object-fit: contain;
+        }
+
+        .lightbox-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .lightbox-info h3 {
+            color: var(--violeta-primario);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .lightbox-info p {
+            color: var(--negro);
+            line-height: 1.6;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--violeta-primario);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            background: #6a4fb8;
+            transform: scale(1.1);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(126, 87, 194, 0.8);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-nav:hover {
+            background: var(--violeta-primario);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-prev {
+            left: 1rem;
+        }
+
+        .lightbox-next {
+            right: 1rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--blanco);
+            color: var(--violeta-primario);
+            border: 2px solid var(--violeta-primario);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--violeta-primario);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1rem;
+            }
+            
+            .lightbox-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .filter-buttons {
+                gap: 0.5rem;
+            }
+            
+            .filter-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Volver al Portfolio
+        </a>
+        <h1>🖼️ Galería Interactiva</h1>
+        <p>Galería de imágenes con efecto lightbox y filtros</p>
+    </div>
+
+    <div class="gallery-container">
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">Todas</button>
+            <button class="filter-btn" data-filter="naturaleza">Naturaleza</button>
+            <button class="filter-btn" data-filter="tecnologia">Tecnología</button>
+            <button class="filter-btn" data-filter="ciencia">Ciencia</button>
+            <button class="filter-btn" data-filter="arte">Arte</button>
+        </div>
+
+        <div class="gallery-grid" id="gallery-grid">
+            <!-- Las imágenes se generarán dinámicamente -->
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightbox-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <button class="lightbox-nav lightbox-prev" id="lightbox-prev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="lightbox-nav lightbox-next" id="lightbox-next">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <img id="lightbox-img" src="/placeholder.svg" alt="">
+            <div class="lightbox-info">
+                <h3 id="lightbox-title"></h3>
+                <p id="lightbox-description"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Datos de las imágenes
+        const images = [
+            {
+                id: 1,
+                src: "img/paisaje-montañoso.jpg",
+                title: "Paisaje Montañoso",
+                description: "Hermoso paisaje de montañas al amanecer",
+                category: "naturaleza"
+            },
+            {
+                id: 2,
+                src: "img/tecnologia-moderna.jpg",
+                title: "Tecnología Moderna",
+                description: "Dispositivos tecnológicos de última generación",
+                category: "tecnologia"
+            },
+            {
+                id: 3,
+                src: "img/laboratorio-cientifico.jpg",
+                title: "Laboratorio Científico",
+                description: "Investigación científica en acción",
+                category: "ciencia"
+            },
+            {
+                id: 4,
+                src: "img/arte-abstracto.jpg",
+                title: "Arte Abstracto",
+                description: "Expresión artística contemporánea",
+                category: "arte"
+            },
+            {
+                id: 5,
+                src: "img/bosque-tropical.jpg",
+                title: "Bosque Tropical",
+                description: "Exuberante vegetación tropical",
+                category: "naturaleza"
+            },
+            {
+                id: 6,
+                src: "img/codigo.jpg",
+                title: "Código de Programación",
+                description: "Desarrollo de software moderno",
+                category: "tecnologia"
+            },
+            {
+                id: 7,
+                src: "img/microscopio.jpg",
+                title: "Microscopio",
+                description: "Investigación microscópica avanzada",
+                category: "ciencia"
+            },
+            {
+                id: 8,
+                src: "img/escultura.jpg",
+                title: "Escultura Moderna",
+                description: "Arte escultórico contemporáneo",
+                category: "arte"
+            },
+            {
+                id: 9,
+                src: "img/oceano-cristalino.jpg",
+                title: "Océano Cristalino",
+                description: "Aguas cristalinas del océano",
+                category: "naturaleza"
+            }
+        ];
+
+        let currentImageIndex = 0;
+        let filteredImages = [...images];
+
+        // Elementos del DOM
+        const galleryGrid = document.getElementById('gallery-grid');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxTitle = document.getElementById('lightbox-title');
+        const lightboxDescription = document.getElementById('lightbox-description');
+        const lightboxClose = document.getElementById('lightbox-close');
+        const lightboxPrev = document.getElementById('lightbox-prev');
+        const lightboxNext = document.getElementById('lightbox-next');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+
+        // Renderizar galería
+        function renderGallery(imagesToRender = images) {
+            galleryGrid.innerHTML = '';
+            imagesToRender.forEach((image, index) => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                galleryItem.innerHTML = `
+                    <img src="${image.src}" alt="${image.title}" loading="lazy">
+                    <div class="overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                    <div class="gallery-info">
+                        <h3>${image.title}</h3>
+                        <p>${image.description}</p>
+                    </div>
+                `;
+                
+                galleryItem.addEventListener('click', () => openLightbox(index, imagesToRender));
+                galleryGrid.appendChild(galleryItem);
+            });
+        }
+
+        // Abrir lightbox
+        function openLightbox(index, imageArray) {
+            currentImageIndex = index;
+            filteredImages = imageArray;
+            const image = imageArray[index];
+            
+            lightboxImg.src = image.src;
+            lightboxTitle.textContent = image.title;
+            lightboxDescription.textContent = image.description;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Cerrar lightbox
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Navegación en lightbox
+        function showPrevImage() {
+            currentImageIndex = (currentImageIndex - 1 + filteredImages.length) % filteredImages.length;
+            const image = filteredImages[currentImageIndex];
+            lightboxImg.src = image.src;
+            lightboxTitle.textContent = image.title;
+            lightboxDescription.textContent = image.description;
+        }
+
+        function showNextImage() {
+            currentImageIndex = (currentImageIndex + 1) % filteredImages.length;
+            const image = filteredImages[currentImageIndex];
+            lightboxImg.src = image.src;
+            lightboxTitle.textContent = image.title;
+            lightboxDescription.textContent = image.description;
+        }
+
+        // Filtros
+        function filterImages(category) {
+            const filtered = category === 'all' ? images : images.filter(img => img.category === category);
+            renderGallery(filtered);
+            
+            // Actualizar botones activos
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`[data-filter="${category}"]`).classList.add('active');
+        }
+
+        // Event listeners
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightboxPrev.addEventListener('click', showPrevImage);
+        lightboxNext.addEventListener('click', showNextImage);
+
+        // Cerrar lightbox al hacer click fuera de la imagen
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // Filtros
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.getAttribute('data-filter');
+                filterImages(filter);
+            });
+        });
+
+        // Navegación con teclado
+        document.addEventListener('keydown', (e) => {
+            if (lightbox.classList.contains('active')) {
+                switch(e.key) {
+                    case 'Escape':
+                        closeLightbox();
+                        break;
+                    case 'ArrowLeft':
+                        showPrevImage();
+                        break;
+                    case 'ArrowRight':
+                        showNextImage();
+                        break;
+                }
+            }
+        });
+
+        // Inicializar
+        renderGallery();
+    </script>
+</body>
+</html>

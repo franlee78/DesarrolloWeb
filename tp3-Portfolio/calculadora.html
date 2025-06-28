@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora - Francisco Lee</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        :root {
+            --violeta-primario: #7e57c2;
+            --violeta-claro: #d1c4e9;
+            --amarillo-primario: #ffd54f;
+            --gris-fondo: #fafafa;
+            --blanco: #ffffff;
+            --negro: #1a1a1a;
+            --sombra: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--violeta-claro), var(--amarillo-primario));
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            color: var(--violeta-primario);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .back-btn {
+            background: var(--violeta-primario);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            text-decoration: none;
+            margin-bottom: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #6a4fb8;
+            transform: translateY(-2px);
+        }
+
+        .calculator {
+            background: var(--blanco);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--sombra);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .display {
+            background: var(--negro);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            text-align: right;
+            font-size: 2rem;
+            font-family: 'Courier New', monospace;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            word-break: break-all;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--gris-fondo);
+            color: var(--negro);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn.operator {
+            background: var(--violeta-primario);
+            color: white;
+        }
+
+        .btn.operator:hover {
+            background: #6a4fb8;
+        }
+
+        .btn.equals {
+            background: var(--amarillo-primario);
+            color: var(--violeta-primario);
+            grid-column: span 2;
+        }
+
+        .btn.equals:hover {
+            background: #ffcc02;
+        }
+
+        .btn.clear {
+            background: #f44336;
+            color: white;
+        }
+
+        .btn.clear:hover {
+            background: #d32f2f;
+        }
+
+        .btn.zero {
+            grid-column: span 2;
+        }
+
+        .history {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--violeta-claro);
+            border-radius: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .history h3 {
+            color: var(--violeta-primario);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .history-item {
+            padding: 0.5rem;
+            background: white;
+            margin-bottom: 0.5rem;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 480px) {
+            .calculator {
+                padding: 1rem;
+            }
+            
+            .display {
+                font-size: 1.5rem;
+                padding: 1rem;
+            }
+            
+            .btn {
+                padding: 0.8rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Volver al Portfolio
+        </a>
+        <h1>🧮 Calculadora Interactiva</h1>
+        <p>Calculadora con operaciones básicas y avanzadas</p>
+    </div>
+
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+        
+        <div class="buttons">
+            <button class="btn clear" onclick="clearAll()">C</button>
+            <button class="btn clear" onclick="clearEntry()">CE</button>
+            <button class="btn operator" onclick="appendToDisplay('√')">√</button>
+            <button class="btn operator" onclick="appendToDisplay('/')">/</button>
+            
+            <button class="btn" onclick="appendToDisplay('7')">7</button>
+            <button class="btn" onclick="appendToDisplay('8')">8</button>
+            <button class="btn" onclick="appendToDisplay('9')">9</button>
+            <button class="btn operator" onclick="appendToDisplay('*')">×</button>
+            
+            <button class="btn" onclick="appendToDisplay('4')">4</button>
+            <button class="btn" onclick="appendToDisplay('5')">5</button>
+            <button class="btn" onclick="appendToDisplay('6')">6</button>
+            <button class="btn operator" onclick="appendToDisplay('-')">-</button>
+            
+            <button class="btn" onclick="appendToDisplay('1')">1</button>
+            <button class="btn" onclick="appendToDisplay('2')">2</button>
+            <button class="btn" onclick="appendToDisplay('3')">3</button>
+            <button class="btn operator" onclick="appendToDisplay('+')">+</button>
+            
+            <button class="btn zero" onclick="appendToDisplay('0')">0</button>
+            <button class="btn" onclick="appendToDisplay('.')">.</button>
+            <button class="btn equals" onclick="calculate()">=</button>
+        </div>
+
+        <div class="history">
+            <h3>Historial</h3>
+            <div id="history-list"></div>
+        </div>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+        let historyList = document.getElementById('history-list');
+        let currentInput = '0';
+        let shouldResetDisplay = false;
+        let history = [];
+
+        function updateDisplay() {
+            display.textContent = currentInput;
+        }
+
+        function appendToDisplay(value) {
+            if (shouldResetDisplay) {
+                currentInput = '0';
+                shouldResetDisplay = false;
+            }
+
+            if (currentInput === '0' && value !== '.') {
+                currentInput = value;
+            } else {
+                currentInput += value;
+            }
+            
+            updateDisplay();
+        }
+
+        function clearAll() {
+            currentInput = '0';
+            updateDisplay();
+        }
+
+        function clearEntry() {
+            if (currentInput.length > 1) {
+                currentInput = currentInput.slice(0, -1);
+            } else {
+                currentInput = '0';
+            }
+            updateDisplay();
+        }
+
+        function calculate() {
+            try {
+                let expression = currentInput;
+                let result;
+
+                // Manejar raíz cuadrada
+                if (expression.includes('√')) {
+                    let number = expression.replace('√', '');
+                    result = Math.sqrt(parseFloat(number));
+                } else {
+                    // Reemplazar × por * para evaluación
+                    expression = expression.replace(/×/g, '*');
+                    result = eval(expression);
+                }
+
+                // Redondear a 8 decimales para evitar errores de punto flotante
+                result = Math.round(result * 100000000) / 100000000;
+
+                // Agregar al historial
+                addToHistory(currentInput + ' = ' + result);
+
+                currentInput = result.toString();
+                shouldResetDisplay = true;
+                updateDisplay();
+            } catch (error) {
+                currentInput = 'Error';
+                shouldResetDisplay = true;
+                updateDisplay();
+            }
+        }
+
+        function addToHistory(calculation) {
+            history.unshift(calculation);
+            if (history.length > 10) {
+                history.pop();
+            }
+            updateHistory();
+        }
+
+        function updateHistory() {
+            historyList.innerHTML = '';
+            history.forEach(item => {
+                let historyItem = document.createElement('div');
+                historyItem.className = 'history-item';
+                historyItem.textContent = item;
+                historyList.appendChild(historyItem);
+            });
+        }
+
+        // Soporte para teclado
+        document.addEventListener('keydown', function(event) {
+            const key = event.key;
+            
+            if (key >= '0' && key <= '9' || key === '.') {
+                appendToDisplay(key);
+            } else if (key === '+' || key === '-' || key === '/' || key === '*') {
+                appendToDisplay(key === '*' ? '×' : key);
+            } else if (key === 'Enter' || key === '=') {
+                calculate();
+            } else if (key === 'Escape') {
+                clearAll();
+            } else if (key === 'Backspace') {
+                clearEntry();
+            }
+        });
+
+        // Inicializar
+        updateDisplay();
+    </script>
+</body>
+</html>

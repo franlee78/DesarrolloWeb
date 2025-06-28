@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,11 +7,21 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="estilos.css" />
 </head>
-
 <body>
   <div class="container fade-in">
-    <img src="img/Foto_CV.jpeg" alt="Foto de perfil" class="avatar" />
-    <h1>Francisco Lee</h1>
+    <div class="profile-section">
+      <div class="profile-image">
+        <img src="img/Foto_CV.jpeg" alt="Foto de perfil" class="avatar" onerror="this.src='https://via.placeholder.com/150/7e57c2/ffffff?text=FL'">
+      </div>
+      <h1 class="profile-name">Francisco Lee</h1>
+      <p class="profile-bio">Estudiante de Desarrollo Web | Apasionado por la Ciencia y la Tecnología</p>
+    </div>
+
+    <ul class="proyectos">
+      <li><a href="tp1-IdentiKit/index.html">TP1 - IdentiKit</a></li>
+      <li><a href="tp2-BlogPersonal/index.html">TP2 - Blog Personal</a></li>
+      <li><a href="tp3-Portfolio/index.html">TP3 - Portfolio</a></li>
+    </ul>
 
     <ul class="redes">
       <li><a href="https://www.instagram.com/fran.lee99/" target="_blank"><i class="fab fa-instagram"></i></a></li>
@@ -20,12 +29,11 @@
       <li><a href="https://github.com/franlee78" target="_blank"><i class="fab fa-github"></i></a></li>
     </ul>
 
-    <ul class="proyectos">
-      <li><a href="tp1-IdentiKit/index.html">TP1 - IdentiKit</a></li>
-      <li><a href="tp2-BlogPersonal/index.html">TP2 - Blog Personal</a></li>
-      <li><a href="tp3.html">TP3 - Portfolio</a></li>
-    </ul>
+    <footer class="footer">
+      <p>© 2025 Francisco Lee</p>
+      <p>Diseño y Desarrollo Web - TP1, TP2, TP3</p>
+    </footer>
   </div>
 </body>
-
 </html>
+</merged_code>

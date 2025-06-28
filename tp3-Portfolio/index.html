@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Francisco Lee - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-brand">Francisco Lee</a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                <li><a href="#sobre-mi" class="nav-link">Sobre mí</a></li>
+                <li><a href="#proyectos" class="nav-link">Proyectos</a></li>
+                <li><a href="#habilidades" class="nav-link">Habilidades</a></li>
+                <li><a href="#contacto" class="nav-link">Contacto</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Sección Inicio -->
+        <section id="inicio" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <img src="../img/Foto_CV.jpeg" alt="Francisco Lee" class="hero-avatar">
+                    <h1>Francisco Lee</h1>
+                    <p class="hero-subtitle">Data Scientist | Desarrollador Web Frontend</p>
+                    <p class="hero-description">
+                        Data Scientist en Centaurus Securities con experiencia en Python, SQL y AWS. 
+                        Estudiante de Ingeniería en Informática especializándome en desarrollo web frontend.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#proyectos" class="btn btn-primary">Ver Proyectos</a>
+                        <a href="#contacto" class="btn btn-secondary">Contactar</a>
+                        <a href="cv-francisco-lee.pdf" class="btn btn-cv" download>
+                            <i class="fas fa-download"></i> Descargar CV
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Sobre mí -->
+        <section id="sobre-mi" class="about">
+            <div class="container">
+                <h2 class="section-title">Sobre mí</h2>
+                <div class="about-content">
+                    <p>
+                        Soy Data Scientist en Centaurus Securities y estudiante de Ingeniería en Informática en UADE. 
+                        Tengo experiencia desarrollando productos financieros, APIs REST con FastAPI y procesamiento 
+                        de datos con SQL Server y MongoDB.
+                    </p>
+                    <p>
+                        Actualmente me especializo en desarrollo web frontend, combinando mi experiencia técnica 
+                        en ciencia de datos con habilidades de diseño y desarrollo web para crear soluciones innovadoras.
+                    </p>
+                    <div class="stats">
+                        <div class="stat">
+                            <h3>3</h3>
+                            <p>Proyectos</p>
+                        </div>
+                        <div class="stat">
+                            <h3>2025</h3>
+                            <p>Inicio</p>
+                        </div>
+                        <div class="stat">
+                            <h3>∞</h3>
+                            <p>Aprendizaje</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Proyectos -->
+        <section id="proyectos" class="projects">
+            <div class="container">
+                <h2 class="section-title">Proyectos JavaScript</h2>
+                <div class="projects-grid">
+                    
+                    <div class="project-card">
+                        <div class="project-icon">🧮</div>
+                        <h3>Calculadora</h3>
+                        <p>Calculadora interactiva con operaciones básicas y avanzadas</p>
+                        <a href="calculadora.html" class="project-link">Ver Proyecto</a>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-icon">🖼️</div>
+                        <h3>Galería</h3>
+                        <p>Galería de imágenes</p>
+                        <a href="galeria.html" class="project-link">Ver Proyecto</a>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-icon">✅</div>
+                        <h3>Lista de Tareas</h3>
+                        <p>Gestor de tareas</p>
+                        <a href="tareas.html" class="project-link">Ver Proyecto</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Habilidades -->
+        <section id="habilidades" class="skills">
+            <div class="container">
+                <h2 class="section-title">Habilidades & CV</h2>
+                
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>Desarrollo</h3>
+                        <div class="skill-list">
+                            <div class="skill-item">
+                                <span>Python</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="95"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span>SQL</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="90"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span>JavaScript</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="75"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span>HTML5 & CSS3</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="85"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Herramientas</h3>
+                        <div class="skill-list">
+                            <div class="skill-item">
+                                <span>AWS (EC2, Lambda, S3)</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="80"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span>Docker & CI/CD</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="75"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span>Git & GitHub</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-width="85"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cv-section">
+                    <h3>Experiencia</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">Agosto 2024 - Actualidad</div>
+                            <div class="timeline-content">
+                                <h4>Científico de Datos - Centaurus Securities S.A.</h4>
+                                <p>Buenos Aires, Argentina</p>
+                                <ul>
+                                    <li>Desarrollo de productos financieros, como reportes de PnL (FIFO), rendimiento, TIR y valuación de carteras, diseñando e implementando el backend</li>
+                                    <li>Construcción de APIs REST con FastAPI y procesamiento de datos desde SQL Server, integrando con frontend mediante endpoints en formato JSON</li>
+                                    <li>Consumo de datos externos mediante APIs y consultas optimizadas a SQL Server (SSMS), con persistencia en MongoDB para casos de uso específicos</li>
+                                    <li>Automatización de pipelines y tareas críticas con APScheduler, despliegues con Docker en EC2, y manejo de ambientes usando Bash y AWS Secrets</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">Marzo 2024 - Julio 2024</div>
+                            <div class="timeline-content">
+                                <h4>Pasante de ETL/Bases de Datos - XSide Solutions</h4>
+                                <p>Buenos Aires, Argentina</p>
+                                <ul>
+                                    <li>Migración de ETLs a versiones actualizadas utilizando Microsoft Visual Studio y SQL Server Management Studio</li>
+                                    <li>Parametrización de variables para gestionar distintos entornos (QA, DEV, PROD) reduciendo errores de despliegue</li>
+                                    <li>Identificación y corrección de problemas críticos en procesos ETL, mejorando la integridad de los datos y la fiabilidad de los procesos</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">Junio 2023 - Febrero 2024</div>
+                            <div class="timeline-content">
+                                <h4>Pasante de DataCom/Analista de Datos - Huawei</h4>
+                                <p>Buenos Aires, Argentina</p>
+                                <ul>
+                                    <li>Desarrollo de scripts SQL optimizados, mejorando los tiempos de ejecución, para ser consumidos por dashboards y gráficos interactivos armados en PowerBI</li>
+                                    <li>Desarrollo de soluciones de monitoreo de métricas de red en tiempo real, sistema de alarmas, y resúmenes históricos</li>
+                                    <li>Análisis de KPIs y KQIs para 600,000 usuarios proporcionando insights clave para la toma de decisiones estratégicas</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Contacto -->
+        <section id="contacto" class="contact">
+            <div class="container">
+                <h2 class="section-title">Contacto</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3>¡Hablemos!</h3>
+                        <p>¿Tienes un proyecto en mente? No dudes en contactarme.</p>
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>francelee10@gmail.com</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fab fa-linkedin"></i>
+                                <a href="https://www.linkedin.com/in/francisco-lee-018b64231" target="_blank">LinkedIn</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fab fa-github"></i>
+                                <a href="https://github.com/franlee78" target="_blank">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <form class="contact-form" id="contact-form">
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" id="nombre" name="nombre" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mensaje">Mensaje</label>
+                            <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Francisco Lee</p>
+            <div class="footer-links">
+                <a href="../index.html">LinkTree</a>
+                <a href="../tp2-BlogPersonal/index.html">Blog</a>
+                <a href="../tp1-IdentiKit/index.html">IdentiKit</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
